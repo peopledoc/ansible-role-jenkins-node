@@ -1,0 +1,13 @@
+---
+# UNIX user vars
+jenkins_authorized_key: null
+jenkins_home: /var/lib/jenkins
+jenkins_username: jenkins
+
+# Jenkins node vars
+jenkins_master_url: null
+jenkins_node_credentials_id: null
+jenkins_node_executors: 2
+jenkins_node_host: null
+jenkins_node_labels: null
+jenkins_node_name: null
