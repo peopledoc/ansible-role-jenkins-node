@@ -1,0 +1,18 @@
+galaxy_info:
+
+  author: Florent PIGOUT
+  company: PeopleDoc
+  description: Provision Jenkins SSH slave using jenkins-api module
+  license: BSD
+
+  min_ansible_version: 2.0
+
+  platforms:
+  - name: Debian
+    versions:
+    - jessie
+
+  galaxy_tags: [jenkins, node, slave, ssh]
+
+dependencies:
+  - novafloss.jenkins-api

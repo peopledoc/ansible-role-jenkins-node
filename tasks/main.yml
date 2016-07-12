@@ -1,0 +1,60 @@
+---
+- name: Install apt requirements
+  apt:
+    name: '{{ item }}'
+    state: present
+  with_items:
+    - default-jre-headless
+    - sudo
+
+- name: Ensure jenkins user and ssh key
+  user:
+    name: '{{ jenkins_username }}'
+    home: '{{ jenkins_home }}'
+    shell: /bin/bash
+    state: present
+
+- name: Make jenkins user sudoer
+  lineinfile:
+    dest: /etc/sudoers
+    state: present
+    line: '{{ jenkins_username }}	ALL=(ALL:ALL) NOPASSWD:ALL'
+    validate: 'visudo -cf %s'
+
+- name: Add master public key to authorized keys
+  authorized_key:
+    user: '{{ jenkins_username }}'
+    key: '{{ jenkins_authorized_key }}'
+
+- name: Check previous node
+  jenkins_api:
+    jenkins_url: '{{ jenkins_master_url }}'
+    command: node_exists
+    args:
+      - '{{ jenkins_node_name or ansible_hostname }}'
+  register: result
+
+- name: Delete previous node
+  jenkins_api:
+    jenkins_url: '{{ jenkins_master_url }}'
+    command: delete_node
+    args:
+      - '{{ jenkins_node_name or ansible_hostname }}'
+  when: result.node_exists
+
+- name: Create jenkins node
+  jenkins_api:
+    jenkins_url: '{{ jenkins_master_url }}'
+    command: create_node
+    args:
+      - '{{ jenkins_node_name or ansible_hostname }}'
+    kwargs:
+      numExecutors: '{{ jenkins_node_executors }}'
+      remoteFS: '{{ jenkins_home }}'
+      labels: '{{ jenkins_node_labels }}'
+      launcher: hudson.plugins.sshslaves.SSHLauncher
+      launcher_params:
+        port: 22
+        username: '{{ jenkins_username }}'
+        credentialsId: '{{ jenkins_node_credentials_id }}'
+        host: '{{ jenkins_node_host or ansible_fqdn }}'

@@ -1,4 +1,4 @@
-novafloss.jenkins_node
+novafloss.jenkins-node
 ======================
 
 Provision Jenkins SSH slave.
@@ -7,21 +7,24 @@ Provision Jenkins SSH slave.
 Requirements
 ------------
 
-python-jenkins from Openstack project to query Jenkins API.
+- `novafloss.jenkins-api`: to create the node with the jenkins REST API
 
 
 Role Variables
 --------------
 
-    # Jenkins node vars.
-    jenkins_master: https://jenkins.lan/
-    jenkins_node_executors: 2
-    jenkins_node_labels: [label1, label2]
-    jenkins_node_name: {{ ansible_hostname }}
-    jenkins_node_credentials: master-ssh
     # UNIX user vars
-    jenkins_username: jenkin
     jenkins_authorized_key: ssh-rsa AAAA...TBZUI9 jenkins@jenkins.lan
+    jenkins_home: /var/lib/jenkins
+    jenkins_username: jenkins
+
+    # Jenkins node vars
+    jenkins_master_url: https://jenkins.mycompany.com/
+    jenkins_node_executors: 2
+    jenkins_node_host: jenkins-node-1.lan.mycompany.net (default: {{ ansible_fqdn }})  ansible_fqdn
+    jenkins_node_labels: [label1, label2]
+    jenkins_node_name: jenkins-node-1 (default: {{ ansible_hostname }})
+    jenkins_node_credentials_id: master-ssh
 
 
 Example Playbook
@@ -31,8 +34,11 @@ Including an example of how to use your role (for instance, with variables passe
 
     - hosts: slave
       roles:
-         - role: novafloss.jenkins_node
-           jenkins_master: https://jenkins.mycompany.com/
+         - role: novafloss.jenkins-api
+         - role: novafloss.jenkins-node
+           jenkins_authorized_key: ssh-rsa AAAA...TBZUI9 jenkins@jenkins.lan
+           jenkins_master_url: https://jenkins.mycompany.com/
+           jenkins_node_credentials_id: master-ssh
 
 
 Copyright
