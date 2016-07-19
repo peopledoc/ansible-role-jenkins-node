@@ -57,4 +57,4 @@
         port: 22
         username: '{{ jenkins_username }}'
         credentialsId: '{{ jenkins_node_credentials_id }}'
-        host: '{{ jenkins_node_host or ansible_fqdn }}'
+        host: '{{ (jenkins_node_host or ansible_eth0.ipv4.address)|trim }}'
