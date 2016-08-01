@@ -7,7 +7,7 @@
     - default-jre-headless
     - sudo
 
-- name: Ensure jenkins user and ssh key
+- name: Ensure jenkins user
   user:
     name: '{{ jenkins_username }}'
     home: '{{ jenkins_home }}'
