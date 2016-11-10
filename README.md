@@ -34,11 +34,11 @@ Including an example of how to use your role (for instance, with variables passe
 
     - hosts: slave
       roles:
-         - role: novafloss.jenkins-api
-         - role: novafloss.jenkins-node
-           jenkins_authorized_key: ssh-rsa AAAA...TBZUI9 jenkins@jenkins.lan
-           jenkins_master_url: https://jenkins.mycompany.com/
-           jenkins_node_credentials_id: master-ssh
+        - role: novafloss.jenkins-api
+        - role: novafloss.jenkins-node
+          jenkins_authorized_key: ssh-rsa AAAA...TBZUI9 jenkins@jenkins.lan
+          jenkins_master_url: https://jenkins.mycompany.com/
+          jenkins_node_credentials_id: master-ssh
 
 
 Copyright
