@@ -22,6 +22,7 @@ Role Variables
     jenkins_master_url: https://jenkins.mycompany.com/
     jenkins_node_executors: 2
     jenkins_node_host: jenkins-node-1.lan.mycompany.net (default: {{ ansible_eth0.ipv4.address }})
+    jenkins_node_port: 22
     jenkins_node_labels: [label1, label2]
     jenkins_node_name: jenkins-node-1 (default: {{ ansible_hostname }})
     jenkins_node_credentials_id: master-ssh

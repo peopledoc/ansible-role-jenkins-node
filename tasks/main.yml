@@ -54,7 +54,7 @@
       labels: '{{ jenkins_node_labels }}'
       launcher: hudson.plugins.sshslaves.SSHLauncher
       launcher_params:
-        port: 22
+        port: "{{ jenkins_node_port }}"
         username: '{{ jenkins_username }}'
         credentialsId: '{{ jenkins_node_credentials_id }}'
         host: '{{ (jenkins_node_host or ansible_eth0.ipv4.address)|trim }}'

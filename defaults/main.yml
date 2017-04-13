@@ -9,5 +9,6 @@ jenkins_master_url: null
 jenkins_node_credentials_id: null
 jenkins_node_executors: 2
 jenkins_node_host: null
+jenkins_node_port: 22
 jenkins_node_labels: null
 jenkins_node_name: null
