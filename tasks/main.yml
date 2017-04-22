@@ -12,6 +12,7 @@
     name: '{{ item }}'
     state: present
   with_items:
+    - ca-certificates-java=20161107~bpo8+1
     - openjdk-8-jre-headless
     - sudo
 
@@ -46,6 +47,7 @@
     args:
       - '{{ jenkins_node_name or ansible_hostname }}'
   register: result
+  when: not ansible_check_mode
 
 - name: Delete previous node
   jenkins_api:
@@ -53,7 +55,9 @@
     command: delete_node
     args:
       - '{{ jenkins_node_name or ansible_hostname }}'
-  when: result.node_exists
+  when:
+    - not ansible_check_mode
+    - result.node_exists
 
 - name: Create jenkins node
   jenkins_api:
@@ -71,3 +75,4 @@
         username: '{{ jenkins_username }}'
         credentialsId: '{{ jenkins_node_credentials_id }}'
         host: '{{ (jenkins_node_host or ansible_eth0.ipv4.address)|trim }}'
+  when: not ansible_check_mode
