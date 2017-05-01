@@ -43,6 +43,8 @@
 - name: Check previous node
   jenkins_api:
     jenkins_url: '{{ jenkins_master_url }}'
+    jenkins_username: '{{ jenkins_master_username }}'
+    jenkins_password: '{{ jenkins_master_password }}'
     command: node_exists
     args:
       - '{{ jenkins_node_name or ansible_hostname }}'
