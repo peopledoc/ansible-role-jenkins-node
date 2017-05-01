@@ -6,6 +6,8 @@ jenkins_username: jenkins
 
 # Jenkins node vars
 jenkins_master_url: null
+jenkins_master_username: ~
+jenkins_master_password: ~
 jenkins_node_credentials_id: null
 jenkins_node_executors: 2
 jenkins_node_host: null
