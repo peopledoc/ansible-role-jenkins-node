@@ -40,6 +40,12 @@
     user: '{{ jenkins_username }}'
     key: '{{ jenkins_authorized_key }}'
 
+- name: Ensure jenkins home belongs to the user
+  file:
+    path: '{{ jenkins_home }}'
+    owner: '{{ jenkins_username}}'
+    recurse: yes
+
 - name: Check previous node
   jenkins_api:
     jenkins_url: '{{ jenkins_master_url }}'
