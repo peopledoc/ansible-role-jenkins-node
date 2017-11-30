@@ -12,3 +12,6 @@ jenkins_node_host: null
 jenkins_node_port: 22
 jenkins_node_labels: null
 jenkins_node_name: null
+
+# packages versions
+ca_certificates_java: ca-certificates-java=20161107~bpo8+1
