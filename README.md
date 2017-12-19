@@ -20,6 +20,8 @@ Role Variables
 
     # Jenkins node vars
     jenkins_master_url: https://jenkins.mycompany.com/
+    jenkins_master_username: admin
+    jenkins_master_password: a63729ab56c0bcba03da92f2a6425c5a
     jenkins_node_executors: 2
     jenkins_node_host: jenkins-node-1.lan.mycompany.net (default: {{ ansible_eth0.ipv4.address }})
     jenkins_node_port: 22
