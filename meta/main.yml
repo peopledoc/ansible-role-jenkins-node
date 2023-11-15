@@ -15,4 +15,4 @@ galaxy_info:
   galaxy_tags: [jenkins, node, slave, ssh]
 
 dependencies:
-  - novafloss.jenkins-api
+  - peopledoc.jenkins-api
